@@ -1,0 +1,136 @@
+@use '../../../styles/fonts' as fonts;
+@use '../../../styles/colors' as colors;
+
+@keyframes scaleIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: fonts.$font-primary;
+    animation: scaleIn 1s ease-out;
+}
+
+.login-box {
+    background-color: white;
+    padding: 40px 60px;
+    /* Menos padding para hacer el contenido más compacto */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    width: 100%;
+    max-width: 450px;
+    position: relative;
+    /* Para posicionar el logo más fácilmente */
+    text-align: center;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Logo */
+.login-box .logo {
+    position: relative;
+    margin-bottom: 20px;
+    /* Espacio entre el logo y el título */
+    overflow: hidden;
+    /* Asegura que el logo no se salga */
+}
+
+.login-box .logo img {
+    max-width: 100%;
+    /* Asegura que el logo no se salga del contenedor */
+    height: auto;
+    /* Mantiene la proporción del logo */
+    max-height: 150px;
+    /* Limita el tamaño máximo del logo para evitar que se agrande demasiado */
+    transition: transform 0.3s ease;
+    /* Agrega transición suave */
+}
+
+/* Efecto de hover para el logo */
+.login-box .logo img:hover {
+    transform: scale(1.1);
+    /* Aumenta el tamaño del logo al pasar el ratón */
+}
+
+/* Inputs */
+.input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #757575;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    border: 2px solid #ddd;
+    border-radius: 30px;
+    font-family: fonts.$font-secondary;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+input:focus {
+    outline: none;
+}
+
+/* Botón de Submit */
+button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 20px;
+    box-sizing: border-box;
+}
+
+/* Error Styles */
+.error {
+    color: #f44336;
+    font-size: 1rem;
+    font-family: fonts.$font-secondary;
+}
+
+.error small {
+    display: block;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .login-box {
+        padding: 30px 40px;
+        /* Ajusta el padding en pantallas más pequeñas */
+        max-width: 90%;
+    }
+
+    .login-box .logo img {
+        max-height: 100px;
+        /* Ajusta el tamaño del logo */
+    }
+}
+
+@media (max-width: 480px) {
+    .login-box {
+        padding: 20px;
+    }
+}
