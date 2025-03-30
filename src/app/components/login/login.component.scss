@@ -1,6 +1,6 @@
 @use '../../../styles/fonts' as fonts;
 @use '../../../styles/colors' as colors;
-
+//login
 @keyframes scaleIn {
     0% {
         transform: scale(0.8);
@@ -113,6 +113,20 @@ button {
 
 .error small {
     display: block;
+}
+
+.register-link {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.register-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
 }
 
 /* Responsive Styles */

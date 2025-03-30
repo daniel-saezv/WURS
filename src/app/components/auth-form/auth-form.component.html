@@ -1,9 +1,12 @@
-<div class="login-container">
-    <div class="login-box">
+<div class="auth-container">
+    <div class="auth-box">
+        @if(logoUrl){
         <div class="logo">
-            <img src="img/wurs-logo.png" alt="Logo" class="logo-image" />
+            <img [src]="logoUrl" alt="Logo" class="logo-image" />
         </div>
-        <form [formGroup]="form" (submit)="onSubmit()">
+        }
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <!-- Email -->
             <div class="form-group">
                 <label for="email">Correo Electrónico</label>
@@ -34,15 +37,13 @@
                 }
             </div>
 
+            <!-- Extra Fields (opcional, para registro) -->
+            <ng-content></ng-content>
+
             <!-- Submit Button -->
-            <button type="submit" [disabled]="form.invalid" class="login-btn">
-                Iniciar sesión
+            <button type="submit" class="auth-btn">
+                {{ buttonText }}
             </button>
         </form>
-
-        <!-- Link to Registration -->
-        <div class="register-link">
-            <p>¿Tienes un pase de registro? <a [routerLink]="'/register'">Crea tu cuenta ahora</a></p>
-        </div>
     </div>
 </div>
