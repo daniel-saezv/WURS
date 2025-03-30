@@ -1,16 +1,26 @@
 <div class="auth-container register">
-    <app-auth-form [form]="form" [buttonText]="'Registrarse'" [logoUrl]="'img/wurs-logo.png'" (formSubmit)="onSubmit()">
-        <div class="form-group">
-            <label for="secret">Secreto</label>
-            <input type="text" id="secret" formControlName="secret" placeholder="Introduce el secreto" />
+  <app-auth-form
+    [form]="form"
+    [buttonText]="'Registrarse'"
+    [logoUrl]="'img/wurs-logo.png'"
+    (formSubmit)="onSubmit()"
+  >
+    <div class="form-group">
+      <label for="secret">Secreto</label>
+      <input
+        type="text"
+        id="secret"
+        formControlName="secret"
+        placeholder="Introduce el secreto"
+      />
 
-            @if(f['secret'].touched && f['secret'].invalid){
-            <div class="error">
-                @if(f['secret'].errors?.['required']){
-                <small>El secreto es obligatorio.</small>
-                }
-            </div>
-            }
-        </div>
-    </app-auth-form>
+      @if(f['secret'].touched && f['secret'].invalid){
+      <div class="error">
+        @if(f['secret'].errors?.['required']){
+        <small>El secreto es obligatorio.</small>
+        }
+      </div>
+      }
+    </div>
+  </app-auth-form>
 </div>

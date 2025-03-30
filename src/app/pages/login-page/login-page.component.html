@@ -1,10 +1,16 @@
 <div class="auth-container login">
-    <app-auth-form [form]="form" [buttonText]="'Iniciar sesión'" [logoUrl]="'img/wurs-logo.png'"
-        (formSubmit)="onSubmit()">
-
-        <!-- Link to Registration -->
-        <div class="register-link">
-            <p>¿Tienes un pase de registro? <a [routerLink]="'/register'">Crea tu cuenta ahora</a></p>
-        </div>
-    </app-auth-form>
+  <app-auth-form
+    [form]="form"
+    [buttonText]="'Iniciar sesión'"
+    [logoUrl]="'img/wurs-logo.png'"
+    (formSubmit)="onSubmit()"
+  >
+    <!-- Link to Registration -->
+    <div class="register-link">
+      <p>
+        ¿Tienes un pase de registro?
+        <a [routerLink]="'/register'">Crea tu cuenta ahora</a>
+      </p>
+    </div>
+  </app-auth-form>
 </div>

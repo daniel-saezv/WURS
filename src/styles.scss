@@ -1,32 +1,32 @@
-@use './styles/fonts' as fonts;
-@use './styles/colors' as colors;
+@use "./styles/fonts" as fonts;
+@use "./styles/colors" as colors;
 
 /* Aplicar los colores */
 html,
 body {
-    background-color: colors.$background;
-    font-family: fonts.$font-primary;
-    color: colors.$text;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+  background-color: colors.$background;
+  font-family: fonts.$font-primary;
+  color: colors.$text;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 button {
-    background-color: colors.$button;
-    color: white;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+  background-color: colors.$button;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 
-    &:hover {
-        background-color: colors.$button-hover;
-        transform: scale(1.05);
-    }
+  &:hover {
+    background-color: colors.$button-hover;
+    transform: scale(1.05);
+  }
 }
 
 input {
-    border-color: #ddd;
+  border-color: #ddd;
 
-    &:focus {
-        border-color: colors.$primary;
-    }
+  &:focus {
+    border-color: colors.$primary;
+  }
 }

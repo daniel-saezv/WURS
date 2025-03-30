@@ -1,5 +1,5 @@
-@use '../../../styles/fonts' as fonts;
-@use '../../../styles/colors' as colors;
+@use "../../../styles/fonts" as fonts;
+@use "../../../styles/colors" as colors;
 
 @keyframes scaleIn {
   0% {
@@ -30,7 +30,7 @@
   border-radius: 15px;
   width: 100%;
   max-width: 450px;
-  position:relative;
+  position: relative;
   text-align: center;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -38,9 +38,9 @@
 
 /* Logo */
 .auth-box .logo {
-position:relative;
-    margin-bottom: 20px;
-    overflow: hidden;
+  position: relative;
+  margin-bottom: 20px;
+  overflow: hidden;
 }
 
 .auth-box .logo img {

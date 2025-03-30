@@ -1,49 +1,59 @@
 <div class="auth-container">
-    <div class="auth-box">
-        @if(logoUrl){
-        <div class="logo">
-            <img [src]="logoUrl" alt="Logo" class="logo-image" />
+  <div class="auth-box">
+    @if(logoUrl){
+    <div class="logo">
+      <img [src]="logoUrl" alt="Logo" class="logo-image" />
+    </div>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Correo Electrónico</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="Introduce tu correo electrónico"
+        />
+        @if(f['email'].touched && f['email'].invalid){
+        <div class="error">
+          @if(f['email'].errors?.['required']){
+          <small>El correo es obligatorio.</small>
+          }@else if(f['email'].errors?.['email']){
+          <small>El correo no es válido.</small>
+          }
         </div>
         }
+      </div>
 
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <!-- Email -->
-            <div class="form-group">
-                <label for="email">Correo Electrónico</label>
-                <input type="email" id="email" formControlName="email" placeholder="Introduce tu correo electrónico" />
-                @if(f['email'].touched && f['email'].invalid){
-                <div class="error">
-                    @if(f['email'].errors?.['required']){
-                    <small>El correo es obligatorio.</small>
-                    }@else if(f['email'].errors?.['email']){
-                    <small>El correo no es válido.</small>
-                    }
-                </div>
-                }
-            </div>
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="Introduce tu contraseña"
+        />
+        @if(f['password'].touched && f['password'].invalid){
+        <div class="error">
+          @if(f['password'].errors?.['required']){
+          <small>La contraseña es obligatoria.</small>
+          }@else if(f['password'].errors?.['minlength']){
+          <small>La contraseña debe tener al menos 6 caracteres.</small>
+          }
+        </div>
+        }
+      </div>
 
-            <!-- Password -->
-            <div class="form-group">
-                <label for="password">Contraseña</label>
-                <input type="password" id="password" formControlName="password" placeholder="Introduce tu contraseña" />
-                @if(f['password'].touched && f['password'].invalid){
-                <div class="error">
-                    @if(f['password'].errors?.['required']){
-                    <small>La contraseña es obligatoria.</small>
-                    }@else if(f['password'].errors?.['minlength']){
-                    <small>La contraseña debe tener al menos 6 caracteres.</small>
-                    }
-                </div>
-                }
-            </div>
+      <!-- Extra Fields (opcional, para registro) -->
+      <ng-content></ng-content>
 
-            <!-- Extra Fields (opcional, para registro) -->
-            <ng-content></ng-content>
-
-            <!-- Submit Button -->
-            <button type="submit" class="auth-btn">
-                {{ buttonText }}
-            </button>
-        </form>
-    </div>
+      <!-- Submit Button -->
+      <button type="submit" class="auth-btn">
+        {{ buttonText }}
+      </button>
+    </form>
+  </div>
 </div>

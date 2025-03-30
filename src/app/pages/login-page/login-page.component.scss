@@ -1,14 +1,14 @@
-@use '../../../styles/colors' as colors;
+@use "../../../styles/colors" as colors;
 .register-link {
-    margin-top: 15px;
-    text-align: center;
+  margin-top: 15px;
+  text-align: center;
 }
 
 .register-link a {
-    color: colors.$primary;
-    text-decoration: none;
+  color: colors.$primary;
+  text-decoration: none;
 }
 
 .register-link a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }

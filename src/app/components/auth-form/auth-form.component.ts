@@ -8,12 +8,11 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './auth-form.component.scss',
 })
 export class AuthFormComponent {
-  @Input() form!: FormGroup; // Recibe el FormGroup desde el componente padre
-  @Input() buttonText = 'Enviar'; // Texto del botón
+  @Input() form!: FormGroup;
+  @Input() buttonText = 'Enviar';
   @Input() logoUrl = '';
   @Output() formSubmit = new EventEmitter<void>(); // Emite el evento de envío
 
-  // Método para verificar si un campo es inválido
   get f() {
     return this.form.controls;
   }
