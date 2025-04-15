@@ -54,4 +54,27 @@ textarea {
   .logo img {
     max-height: 100px;
   }
+  input,
+  select,
+  textarea {
+    padding: 8px;
+    font-size: 1rem;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+
+  .submit-button {
+    padding: 10px;
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+
+  .form-field {
+    gap: 0.15rem;
+  }
+
+  label,
+  .error {
+    font-size: 0.9rem;
+  }
 }

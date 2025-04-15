@@ -14,9 +14,9 @@ export class RegisterPageComponent {
     {
       type: 'email',
       name: 'email',
-      label: 'Correo',
+      label: 'Correo electrónico',
       id: 'email',
-      placeholder: 'Introduce tu email',
+      placeholder: 'Introduce tu correo electrónico',
       validators: [Validators.required, Validators.email],
       validationMessages: {
         required: 'El correo es obligatorio.',
