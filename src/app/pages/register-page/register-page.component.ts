@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { DynamicFormComponent } from '../../components/dynamic-form/dynamic-form.component';
 import { DynamicField } from '../../components/dynamic-form/dynamic-field';
+import { AuthService } from '../../services/auth.service';
+import { ToastService } from '../../services/toast.service';
+import { RegisterRequest } from '../../models/register-request.model';
 
 @Component({
   selector: 'app-register-page',
@@ -37,8 +40,8 @@ export class RegisterPageComponent {
     },
     {
       type: 'input',
-      id: 'register-pass',
-      name: 'register-pass',
+      id: 'registerPass',
+      name: 'registerPass',
       placeholder: 'Introduce tu pase de registro',
       label: 'Pase de registro',
       validators: [Validators.required],
@@ -47,10 +50,24 @@ export class RegisterPageComponent {
       },
     },
   ];
-  form!: FormGroup;
+  authService: AuthService = inject(AuthService);
+  toastService: ToastService = inject(ToastService);
+
+  constructor() {
+    effect(() => {
+      if (this.authService.registered()) {
+        this.toastService.show('Registro exitoso', 'success');
+      } else if (this.authService.hasErrors()) {
+        this.toastService.show('Error en el registro', 'error');
+      }
+    });
+  }
 
   handleSubmit(formData: FormGroup) {
-    // Aquí puedes manejar el proceso de login (llamada API, etc.)
-    console.log('Form submitted', formData.value);
+    const request: RegisterRequest = {
+      email: formData.value.email,
+      password: formData.value.password,
+    };
+    this.authService.register(request, formData.value.registerPass);
   }
 }
