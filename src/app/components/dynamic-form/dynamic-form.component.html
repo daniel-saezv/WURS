@@ -1,0 +1,63 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  @for (field of fields; track field.name) {
+    <div class="form-field">
+      <label>{{ field.label }}</label>
+
+      @switch (field.type) {
+        @case ("input") {
+          <input
+            type="text"
+            [formControlName]="field.name"
+            [placeholder]="field.placeholder"
+            [id]="field.id || field.name"
+          />
+        }
+        @case ("email") {
+          <input
+            type="email"
+            [formControlName]="field.name"
+            [placeholder]="field.placeholder"
+            [id]="field.id || field.name"
+          />
+        }
+        @case ("select") {
+          <select
+            [formControlName]="field.name"
+            [id]="field.id || field.name"
+            [title]="field.label"
+          >
+            @for (opt of field.options ?? []; track opt.value) {
+              <option [value]="opt.value" [disabled]="opt.disabled ?? false">
+                @if (opt.icon) {
+                  <span class="mr-1">{{ opt.icon }}</span>
+                }
+                {{ opt.label }}
+              </option>
+            }
+          </select>
+        }
+        @case ("checkbox") {
+          <input
+            type="checkbox"
+            [formControlName]="field.name"
+            [id]="field.id || field.name"
+          />
+        }
+        @case ("textarea") {
+          <textarea
+            [formControlName]="field.name"
+            [placeholder]="field.placeholder"
+            [id]="field.id || field.name"
+          ></textarea>
+        }
+      }
+      @if (getErrorMessage(field); as errorMsg) {
+        <div class="error">{{ errorMsg }}</div>
+      }
+    </div>
+  }
+  <ng-content></ng-content>
+  <button type="submit" class="submit-button">
+    {{ buttonText }}
+  </button>
+</form>

@@ -1,0 +1,57 @@
+@use "../../../styles/fonts" as fonts;
+@use "../../../styles/colors" as colors;
+
+:host {
+  display: block;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+label {
+  font-size: 1rem;
+  margin-bottom: 5px;
+  color: #757575;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1rem;
+  border: 2px solid #ddd;
+  border-radius: 30px;
+  font-family: fonts.$font-secondary;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 20px;
+  box-sizing: border-box;
+}
+
+.error {
+  color: #f44336;
+  font-size: 1rem;
+  font-family: fonts.$font-secondary;
+}
+
+@media (max-width: 768px) {
+  .logo img {
+    max-height: 100px;
+  }
+}

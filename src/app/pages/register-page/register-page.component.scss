@@ -1,4 +1,55 @@
+
 @use "../../../styles/fonts" as fonts;
+@use "../../../styles/colors" as colors;
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: fonts.$font-primary;
+  animation: scaleIn 1s ease-out;
+}
+
+.auth-box {
+  background-color: white;
+  padding: 40px 60px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  width: 100%;
+  max-width: 450px;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  transition: all 0.3s ease;
+
+  .logo {
+    position: relative;
+    margin-bottom: 20px;
+    overflow: hidden;
+    img {
+      max-width: 100%;
+      height: auto;
+      max-height: 150px;
+      transition: transform 0.3s ease;
+    }
+    img:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
 input {
   width: 100%;
   padding: 12px;
@@ -12,6 +63,15 @@ input {
   margin-bottom: 20px;
 }
 
-input:focus {
-  outline: none;
+@media (max-width: 768px) {
+  .auth-box {
+    padding: 30px 40px;
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-box {
+    padding: 20px;
+  }
 }

@@ -1,16 +1,19 @@
-<div class="auth-container login">
-  <app-auth-form
-    [form]="form"
-    [buttonText]="'Iniciar sesión'"
-    [logoUrl]="'img/wurs-logo.png'"
-    (formSubmit)="onSubmit()"
-  >
-    <!-- Link to Registration -->
-    <div class="register-link">
-      <p>
-        ¿Tienes un pase de registro?
-        <a [routerLink]="'/register'">Crea tu cuenta ahora</a>
-      </p>
+<div class="auth-container">
+  <div class="auth-box">
+    <div class="logo">
+      <img [src]="'img/wurs-logo.png'" alt="A WURS logo as the form title" />
     </div>
-  </app-auth-form>
+    <app-dynamic-form
+      [fields]="formFields"
+      buttonText="Iniciar Sesión"
+      (formSubmit)="handleSubmit($event)"
+    >
+      <div class="register-link">
+        <p>
+          ¿Tienes un pase de registro?
+          <a [routerLink]="'/register'">Crea tu cuenta ahora</a>
+        </p>
+      </div>
+    </app-dynamic-form>
+  </div>
 </div>

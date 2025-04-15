@@ -6,12 +6,15 @@ import { toSignal } from '@angular/core/rxjs-interop';
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = 'https://localhost:8081/register';
+  private baseUrl = 'https://localhost:8081';
 
   constructor(private http: HttpClient) {}
 
   // Método para registro usando Signals
   register(data: { email: string; password: string; secret: string }) {
-    return toSignal(this.http.post(`${this.baseUrl}/register`, data));
+    const headers = { 'User-Create-Secret': data.secret };
+    return toSignal(
+      this.http.post(`${this.baseUrl}/register`, data, { headers })
+    );
   }
 }
