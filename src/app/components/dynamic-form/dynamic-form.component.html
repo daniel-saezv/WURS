@@ -12,6 +12,14 @@
             [id]="field.id || field.name"
           />
         }
+        @case ("password") {
+          <input
+            type="password"
+            [formControlName]="field.name"
+            [placeholder]="field.placeholder"
+            [id]="field.id || field.name"
+          />
+        }
         @case ("email") {
           <input
             type="email"

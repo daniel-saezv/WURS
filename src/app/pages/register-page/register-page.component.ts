@@ -27,7 +27,7 @@ export class RegisterPageComponent {
       },
     },
     {
-      type: 'input',
+      type: 'password',
       id: 'password',
       name: 'password',
       placeholder: 'Introduce tu contraseña',
@@ -39,7 +39,7 @@ export class RegisterPageComponent {
       },
     },
     {
-      type: 'input',
+      type: 'password',
       id: 'registerPass',
       name: 'registerPass',
       placeholder: 'Introduce tu pase de registro',
@@ -57,8 +57,6 @@ export class RegisterPageComponent {
     effect(() => {
       if (this.authService.registered()) {
         this.toastService.show('Registro exitoso', 'success');
-      } else if (this.authService.hasErrors()) {
-        this.toastService.show('Error en el registro', 'error');
       }
     });
   }

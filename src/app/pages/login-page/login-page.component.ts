@@ -25,7 +25,7 @@ export class LoginPageComponent {
       },
     },
     {
-      type: 'input',
+      type: 'password',
       id: 'password',
       name: 'password',
       placeholder: 'Introduce tu contraseña',
@@ -38,11 +38,7 @@ export class LoginPageComponent {
     },
   ];
 
-  // Método para verificar si un campo es inválido
-
-  // Método para manejar el envío del formulario
   handleSubmit(formData: FormGroup) {
-    // Aquí puedes manejar el proceso de login (llamada API, etc.)
     console.log('Form submitted', formData.value);
   }
 }

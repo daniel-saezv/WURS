@@ -2,7 +2,7 @@ import { ValidatorFn } from '@angular/forms';
 import { DynamicOption } from './dynamic-option';
 
 export interface DynamicField {
-  type: 'input' | 'select' | 'checkbox' | 'textarea' | 'email';
+  type: 'input' | 'select' | 'checkbox' | 'textarea' | 'email' | 'password';
   name: string;
   label: string;
   id: string;
