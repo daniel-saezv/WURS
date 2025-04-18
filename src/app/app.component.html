@@ -1,10 +1,15 @@
-@if(isLogged){<app-header></app-header>}
+@if (isLogged) {
+  <app-header />
+}
 
 <main>
-  <app-toast/>
+  <app-toast />
   <div class="content">
+    <app-loading-spinner />
     <router-outlet />
   </div>
 </main>
 
-@if(isLogged){<app-footer></app-footer>}
+@if (isLogged) {
+  <app-footer />
+}
