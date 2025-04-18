@@ -2,9 +2,9 @@ import { Component, effect, inject } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { DynamicFormComponent } from '../../components/dynamic-form/dynamic-form.component';
 import { DynamicField } from '../../components/dynamic-form/dynamic-field';
-import { AuthService } from '../../services/auth.service';
-import { ToastService } from '../../services/toast.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { RegisterRequest } from '../../models/register-request.model';
+import { ToastService } from '../../services/shared/toast.service';
 
 @Component({
   selector: 'app-register-page',

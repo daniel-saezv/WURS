@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { RegisterRequest } from '../models/register-request.model';
-import { ErrorHandlerService } from './error-handler.service';
+import { RegisterRequest } from '../../models/register-request.model';
+import { ErrorHandlerService } from '../shared/error-handler.service';
 
 @Injectable({
   providedIn: 'root',

@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
+import { ErrorResponse } from '../../models/error-response.model';
 import { ToastService } from './toast.service';
-import { ErrorResponse } from '../models/error-response.model';
 
 @Injectable({
   providedIn: 'root',
