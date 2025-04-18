@@ -3,7 +3,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { DynamicFormComponent } from '../../components/dynamic-form/dynamic-form.component';
 import { DynamicField } from '../../components/dynamic-form/dynamic-field';
 import { AuthService } from '../../services/auth/auth.service';
-import { RegisterRequest } from '../../models/register-request.model';
+import { RegisterRequest } from '../../models/auth/register-request.model';
 import { ToastService } from '../../services/shared/toast.service';
 
 @Component({

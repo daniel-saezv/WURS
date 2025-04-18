@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { DynamicFormComponent } from '../../components/dynamic-form/dynamic-form.component';
 import { DynamicField } from '../../components/dynamic-form/dynamic-field';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
+import { LoginRequest } from '../../models/auth/login-request.model';
 
 @Component({
   selector: 'app-login-page',
@@ -38,7 +40,13 @@ export class LoginPageComponent {
     },
   ];
 
+  authService: AuthService = inject(AuthService);
+
   handleSubmit(formData: FormGroup) {
-    console.log('Form submitted', formData.value);
+    const request: LoginRequest = {
+      email: formData.get('email')?.value,
+      password: formData.get('password')?.value,
+    };
+    this.authService.login(request);
   }
 }
