@@ -3,6 +3,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { RegisterRequest } from '../../models/auth/register-request.model';
 import { ErrorHandlerService } from '../shared/error-handler.service';
 import { LoginRequest } from '../../models/auth/login-request.model';
+import { Observable, map, catchError, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -43,28 +44,33 @@ export class AuthService {
 
     const params = new HttpParams().set('useCookies', true);
 
-    this.http.post(`${this.baseUrl}/login`, request, { params }).subscribe({
-      next: () => {
-        this._isLoggedIn.set(true);
-      },
-      error: (errorResponse) => {
-        this._hasErrors.set(true);
-        this.errorHandler.notifyErrors(errorResponse.error);
-      },
-      complete: () => this._isSubmitting.set(false),
-    });
-  }
-
-  checkAuth() {
     this.http
-      .get(`${this.baseUrl}/manage/info`, { withCredentials: true })
+      .post(`${this.baseUrl}/login`, request, { withCredentials: true, params })
       .subscribe({
         next: () => {
           this._isLoggedIn.set(true);
         },
-        error: () => {
-          this._isLoggedIn.set(false);
+        error: (errorResponse) => {
+          this._hasErrors.set(true);
+          this.errorHandler.notifyErrors(errorResponse.error);
         },
+        complete: () => this._isSubmitting.set(false),
       });
+  }
+  checkAuth(): Observable<boolean> {
+    return this.http
+      .get<{
+        isAuthenticated: boolean;
+      }>(`${this.baseUrl}/manage/info`, { withCredentials: true })
+      .pipe(
+        map(() => {
+          this._isLoggedIn.set(true);
+          return true;
+        }),
+        catchError(() => {
+          this._isLoggedIn.set(false);
+          return of(false);
+        }),
+      );
   }
 }
