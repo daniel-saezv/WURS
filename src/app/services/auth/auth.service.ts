@@ -3,7 +3,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { RegisterRequest } from '../../models/auth/register-request.model';
 import { ErrorHandlerService } from '../shared/error-handler.service';
 import { LoginRequest } from '../../models/auth/login-request.model';
-import { Observable, map, catchError, of } from 'rxjs';
+import { Observable, map, catchError, of, finalize, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -23,39 +23,46 @@ export class AuthService {
   registered = this._wasRegistered.asReadonly();
   isLoggedIn = this._isLoggedIn.asReadonly();
 
-  register(request: RegisterRequest, registerPass: string) {
+  register(
+    request: RegisterRequest,
+    registerPass: string,
+  ): Observable<boolean> {
     this._isSubmitting.set(true);
     this._hasErrors.set(false);
 
     const headers = { 'User-Create-Secret': registerPass };
-    this.http.post(`${this.baseUrl}/register`, request, { headers }).subscribe({
-      next: () => this._wasRegistered.set(true),
-      error: (errorResponse) => {
-        this._hasErrors.set(true);
-        this.errorHandler.notifyErrors(errorResponse.error);
-      },
-      complete: () => this._isSubmitting.set(false),
-    });
+    return this.http
+      .post(`${this.baseUrl}/register`, request, { headers })
+      .pipe(
+        tap(() => this._wasRegistered.set(true)),
+        map(() => true),
+        catchError((errorResponse) => {
+          this._hasErrors.set(true);
+          this.errorHandler.notifyErrors(errorResponse.error);
+          return of(false);
+        }),
+        finalize(() => this._isSubmitting.set(false)),
+      );
   }
 
-  login(request: LoginRequest) {
+  login(request: LoginRequest): Observable<boolean> {
     this._isSubmitting.set(true);
     this._hasErrors.set(false);
 
     const params = new HttpParams().set('useCookies', true);
 
-    this.http
+    return this.http
       .post(`${this.baseUrl}/login`, request, { withCredentials: true, params })
-      .subscribe({
-        next: () => {
-          this._isLoggedIn.set(true);
-        },
-        error: (errorResponse) => {
+      .pipe(
+        tap(() => this._isLoggedIn.set(true)),
+        map(() => true),
+        catchError((errorResponse) => {
           this._hasErrors.set(true);
           this.errorHandler.notifyErrors(errorResponse.error);
-        },
-        complete: () => this._isSubmitting.set(false),
-      });
+          return of(false);
+        }),
+        finalize(() => this._isSubmitting.set(false)),
+      );
   }
   checkAuth(): Observable<boolean> {
     return this.http

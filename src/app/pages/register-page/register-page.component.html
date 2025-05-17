@@ -10,3 +10,8 @@
     />
   </div>
 </div>
+@if (registerResult$ | async; as result) {
+  <span>¡Login correcto!</span>
+} @else {
+  <span>Login incorrecto</span>
+}

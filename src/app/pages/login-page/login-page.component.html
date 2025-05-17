@@ -17,3 +17,8 @@
     </app-dynamic-form>
   </div>
 </div>
+@if (loginResult$ | async; as result) {
+  <span>¡Login correcto!</span>
+} @else {
+  <span>Login incorrecto</span>
+}

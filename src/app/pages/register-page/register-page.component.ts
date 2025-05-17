@@ -5,14 +5,29 @@ import { DynamicField } from '../../components/dynamic-form/dynamic-field';
 import { AuthService } from '../../services/auth/auth.service';
 import { RegisterRequest } from '../../models/auth/register-request.model';
 import { ToastService } from '../../services/shared/toast.service';
+import { Subject, switchMap } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-register-page',
-  imports: [DynamicFormComponent],
+  imports: [DynamicFormComponent, AsyncPipe],
   templateUrl: './register-page.component.html',
   styleUrl: './register-page.component.scss',
 })
 export class RegisterPageComponent {
+  private submit$ = new Subject<FormGroup>();
+  registerResult$ = this.submit$.pipe(
+    switchMap((formData) => {
+      const request: RegisterRequest = {
+        email: formData.get('email')?.value,
+        password: formData.get('password')?.value,
+      };
+      return this.authService.register(
+        request,
+        formData.get('registerPass')?.value,
+      );
+    }),
+  );
   formFields: DynamicField[] = [
     {
       type: 'email',
@@ -62,10 +77,6 @@ export class RegisterPageComponent {
   }
 
   handleSubmit(formData: FormGroup) {
-    const request: RegisterRequest = {
-      email: formData.value.email,
-      password: formData.value.password,
-    };
-    this.authService.register(request, formData.value.registerPass);
+    this.submit$.next(formData);
   }
 }

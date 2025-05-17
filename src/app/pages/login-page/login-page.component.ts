@@ -5,14 +5,26 @@ import { DynamicField } from '../../components/dynamic-form/dynamic-field';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { LoginRequest } from '../../models/auth/login-request.model';
+import { Subject, switchMap } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-login-page',
-  imports: [DynamicFormComponent, RouterModule],
+  imports: [DynamicFormComponent, RouterModule, AsyncPipe],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })
 export class LoginPageComponent {
+  private submit$ = new Subject<FormGroup>();
+  loginResult$ = this.submit$.pipe(
+    switchMap((formData) => {
+      const request: LoginRequest = {
+        email: formData.get('email')?.value,
+        password: formData.get('password')?.value,
+      };
+      return this.authService.login(request);
+    })
+  );
   formFields: DynamicField[] = [
     {
       type: 'email',
@@ -43,10 +55,6 @@ export class LoginPageComponent {
   authService: AuthService = inject(AuthService);
 
   handleSubmit(formData: FormGroup) {
-    const request: LoginRequest = {
-      email: formData.get('email')?.value,
-      password: formData.get('password')?.value,
-    };
-    this.authService.login(request);
+    this.submit$.next(formData);
   }
 }
